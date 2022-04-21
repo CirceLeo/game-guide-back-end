@@ -28,12 +28,14 @@ end
 
 User.create(
     username: "eamon",
-    password: "password"
+    password: "password",
+    profile_pic: ProfilePic.all.sample
 )
 
 User.create(
     username: "calypso",
-    password: "margot"
+    password: "margot",
+    profile_pic: ProfilePic.all.sample
 )
 
 puts "🌱 Seeding games..."
