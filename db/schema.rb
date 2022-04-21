@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 2022_04_21_021618) do
   create_table "game_relationships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
-    t.boolean "owned?"
-    t.boolean "played?"
-    t.boolean "liked?"
+    t.boolean "owned"
+    t.boolean "played"
+    t.boolean "liked"
     t.string "comment"
     t.integer "hours_played"
     t.datetime "created_at", precision: 6, null: false

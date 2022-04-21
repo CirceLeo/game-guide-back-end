@@ -328,9 +328,9 @@ puts "🌱 Seeding game relationships..."
     GameRelationship.create(
         game: Game.all.sample,
         user: User.all.sample,
-        played?: [true, false].sample,
-        owned?: [true, false].sample,
-        liked?: [true, false].sample,
+        played: [true, false].sample,
+        owned: [true, false].sample,
+        liked: [true, false].sample,
         comment: Faker::ChuckNorris.fact
     )
 end

@@ -73,9 +73,11 @@ class ApplicationController < Sinatra::Base
     ProfilePic.all.to_json
   end
 
-
-
-
+  delete '/game_relationships/:user_id/:game_id' do
+    relationship = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+    relationship.destroy
+    relationship.to_json
+  end
 
   delete '/users/:id' do
     user = User.find(params[:id])
@@ -99,11 +101,11 @@ class ApplicationController < Sinatra::Base
 
   post '/game_relationships' do
     game_relatinship = GameRelationship.create(
-      user: params[:user],
-      game: params[:game],
-      owned?: params[:owned?],
-      played?: params[:played?],
-      liked?: params[:liked?],
+      user_id: params[:user_id],
+      game_id: params[:game_id],
+      owned: params[:owned],
+      played: params[:played],
+      liked: params[:liked],
       comment: params[:comment],
       hours_played: params[:hours_played]
     )
