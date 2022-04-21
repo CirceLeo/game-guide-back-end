@@ -17,7 +17,7 @@ ProfilePic.create(picture_src: "https://www.pngmart.com/files/11/Chuck-Norris-PN
 
 puts "🌱 Seeding users..."
 
-20.times do
+10.times do
     User.create(
         username: Faker::Twitter.screen_name,
         password: "im a unique individual",
@@ -25,6 +25,18 @@ puts "🌱 Seeding users..."
     )
 
 end
+
+kev = User.create(
+    username: "kev",
+    password: "password",
+    profile_pic: ProfilePic.all.sample
+)
+
+chett = User.create(
+    username: "brewchetta",
+    password: "wish i was with phase 4"
+    profile_pic: rofilePic.all.sample
+)
 
 User.create(
     username: "eamon",
@@ -323,8 +335,16 @@ scyth = Game.create(
 
 puts "🌱 Seeding game relationships..."
 
+GameRelationship.create(
+    game: game5,
+    user: kev,
+    played: true,
+    owned: true,
+    liked: true,
+    comment: "TIME TO EXPLODE SOME KITTENS"
+)
 
-300.times do
+150.times do
     GameRelationship.create(
         game: Game.all.sample,
         user: User.all.sample,
