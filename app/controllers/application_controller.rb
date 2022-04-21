@@ -35,14 +35,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/search/:name/:playtime/:num_players' do
-
       game = Game.all.filter{ |g| 
         g.title.downcase.include?(params[:name].downcase) &&
         g.max_play_time <= params[:playtime].to_i &&
         g.min_players <= params[:num_players].to_i
         }
-      game.to_json(include: {game_relationships: {include: :user}})
+      game.to_json(include: {game_relationships: {include: {user: {include: :profile_pic}}}})
   end
+
 
   get '/users' do
     User.all.to_json
@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
 
   get '/users/by-username/:username' do
     user = User.find_by(username: params[:username])
-    user.to_json(include: {game_relationships: {include: :game}})
+    user.to_json(include: [{game_relationships: {include: :game}}, :profile_pic])
   end
   #game relationship
   get '/game_relationships' do
@@ -112,9 +112,9 @@ class ApplicationController < Sinatra::Base
 
   post '/users' do
     user = User.create(
+      password: params[:password],
       username: params[:username],
-      profile_pic_id: params[:profile_pic_id],
-      password: params[:password]
+      profile_pic_id: params[:profile_pic_id]
     )
     user.to_json
   end
@@ -124,6 +124,7 @@ class ApplicationController < Sinatra::Base
       user: params[:user],
       content: params[:content]
     )
+    message.to_json
   end
 
 
