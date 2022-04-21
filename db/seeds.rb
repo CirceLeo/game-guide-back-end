@@ -186,9 +186,8 @@ roots = Game.create(
 
     min_age: 4,
     is_expansion: false,
-    mechanics: "action_queue, area_control, dice_rolling, engine_building, hand_management, variable_player_powers"
+    mechanics: "action_queue, area_control, dice_rolling, engine_building, hand_management, variable_player_powers",
     categories: "adventure, animals, asymmetric",
-
 )
 
 banana = Game.create(
@@ -202,7 +201,7 @@ banana = Game.create(
     max_players: 8,
     min_age: 7,
     is_expansion: false,
-    mechanics: "tile_placement"
+    mechanics: "tile_placement",
     categories: "",
 
 )
@@ -219,7 +218,7 @@ splendor = Game.create(
 
     min_age: 10,
     is_expansion: false,
-    mechanics: "drafting, engine_building, set_collection "
+    mechanics: "drafting, engine_building, set_collection ",
     categories: "card_game, economic, resource_management",
 
 )
@@ -236,7 +235,7 @@ wolf = Game.create(
 
     min_age: 8,
     is_expansion: false,
-    mechanics: "hidden_roles, hidden_traitor, role_playing, variable_player_powers, voting "
+    mechanics: "hidden_roles, hidden_traitor, role_playing, variable_player_powers, voting ",
     categories: "bluffing, card_game, deduction, party_game",
 
 )
@@ -252,7 +251,7 @@ hanabi = Game.create(
     min_players: 2,
     min_age: 8,
     is_expansion: false,
-    mechanics: "communication_limits, cooperative_play, hand_management, memory, set_collection"
+    mechanics: "communication_limits, cooperative_play, hand_management, memory, set_collection",
     categories: "card_game, deduction",
 
 )
@@ -268,7 +267,7 @@ azul = Game.create(
     min_players: 2,
     min_age: 8,
     is_expansion: false,
-    mechanics: "drafting, end_game_bonuses, pattern_building, tile_placement"
+    mechanics: "drafting, end_game_bonuses, pattern_building, tile_placement",
     categories: "abstract",
 
 )
@@ -284,7 +283,7 @@ scyth = Game.create(
     min_players: 1,
     min_age: 14,
     is_expansion: false,
-    mechanics: "action_selection, area_control, hidden_objective, variable_player_powers, engine_building, grid_movement"
+    mechanics: "action_selection, area_control, hidden_objective, variable_player_powers, engine_building, grid_movement",
     categories: "asymmetric, resource_management, territory_building",
 
 )
