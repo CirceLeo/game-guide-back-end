@@ -53,6 +53,12 @@ class ApplicationController < Sinatra::Base
     user.to_json(include: {game_relationships: {include: :game}})
   end
 
+  get '/user_games/:id' do
+    user = User.find(params[:id])
+    games = user.games.uniq
+    games.to_json
+  end
+
   get '/users/by-username/:username' do
     user = User.find_by(username: params[:username])
     user.to_json(include: [{game_relationships: {include: :game}}, :profile_pic])
@@ -73,9 +79,21 @@ class ApplicationController < Sinatra::Base
     ProfilePic.all.to_json
   end
 
+  delete '/game_relationships/:user_id/:game_id' do
+    relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+    ids_to_kill = relationships.map  do |relationship|
+      relationship.id
+    end 
+    GameRelationship.delete(ids_to_kill)    
+    # relationships.all.to_json
+  end
 
-
-
+  get '/game_relationships/:user_id/:game_id' do
+    relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+    ids_to_kill = relationships.map {|relationship| relationship.id }
+    # delete(ids_to_kill)
+    ids_to_kill.to_json
+  end
 
   delete '/users/:id' do
     user = User.find(params[:id])
@@ -99,11 +117,11 @@ class ApplicationController < Sinatra::Base
 
   post '/game_relationships' do
     game_relatinship = GameRelationship.create(
-      user: params[:user],
-      game: params[:game],
-      owned?: params[:owned?],
-      played?: params[:played?],
-      liked?: params[:liked?],
+      user_id: params[:user_id],
+      game_id: params[:game_id],
+      owned: params[:owned],
+      played: params[:played],
+      liked: params[:liked],
       comment: params[:comment],
       hours_played: params[:hours_played]
     )
