@@ -16,12 +16,23 @@ class Game < ActiveRecord::Base
         ever_appear
     end
 
+    def share_any_categories categories_string
+        ever_appear = false
+        self.categories.split(",").each do |category| 
+            if categories_string.include?(category) 
+                ever_appear = true
+            end
+        end
+        ever_appear
+    end
+
 
     def find_similar_games 
         sim_games = Game.all.filter do |g| 
             g.max_play_time <= self.max_play_time + 10 &&
             g.max_players <= self.max_players + 2 &&
-            self.share_any_mechanics(g.mechanics) &&
+            (self.share_any_mechanics(g.mechanics) ||
+            self.share_any_categories(g.categories)) &&
             g.id != self.id
         end
         sim_games
@@ -32,6 +43,10 @@ class Game < ActiveRecord::Base
             relationship.comment + "  -  " + relationship.user.username
         end
         comments
+    end
+
+    def self.get_a_random_game
+        Game.all.sample
     end
 
 end

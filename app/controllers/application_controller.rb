@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
 
   get '/user_games/:id' do
     user = User.find(params[:id])
-    games = user.games
+    games = user.games.uniq
     games.to_json
   end
 
@@ -84,16 +84,16 @@ class ApplicationController < Sinatra::Base
     ids_to_kill = relationships.map  do |relationship|
       relationship.id
     end 
-    delete(ids_to_kill)    
-    relationships.all.to_json
+    GameRelationship.delete(ids_to_kill)    
+    # relationships.all.to_json
   end
 
-  # get '/game_relationships/:user_id/:game_id' do
-  #   relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
-  #   ids_to_kill = relationships.map{|relationship.id| relationship.id }
-  #   delete(ids_to_kill)
-  #   relationships.all.to_json
-  # end
+  get '/game_relationships/:user_id/:game_id' do
+    relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+    ids_to_kill = relationships.map {|relationship| relationship.id }
+    # delete(ids_to_kill)
+    ids_to_kill.to_json
+  end
 
   delete '/users/:id' do
     user = User.find(params[:id])
