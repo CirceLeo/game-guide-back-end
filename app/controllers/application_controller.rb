@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
 
   get '/games/:id' do
     game = Game.find(params[:id])
-    game.to_json(include: {game_relationships: {include: :user}})
+    game.to_json(include: {game_relationships: {include: {user: {include: :profile_pic}}}})
   end
 
   get '/games_with_comments' do
