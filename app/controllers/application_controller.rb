@@ -53,6 +53,12 @@ class ApplicationController < Sinatra::Base
     user.to_json(include: {game_relationships: {include: :game}})
   end
 
+  get '/user_games/:id' do
+    user = User.find(params[:id])
+    games = user.games
+    games.to_json
+  end
+
   get '/users/by-username/:username' do
     user = User.find_by(username: params[:username])
     user.to_json(include: {game_relationships: {include: :game}})
@@ -74,10 +80,20 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/game_relationships/:user_id/:game_id' do
-    relationship = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
-    relationship.destroy
-    relationship.to_json
+    relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+    ids_to_kill = relationships.map  do |relationship|
+      relationship.id
+    end 
+    delete(ids_to_kill)    
+    relationships.all.to_json
   end
+
+  # get '/game_relationships/:user_id/:game_id' do
+  #   relationships = GameRelationship.where("user_id = ? AND game_id=?", params[:user_id], params[:game_id])
+  #   ids_to_kill = relationships.map{|relationship.id| relationship.id }
+  #   delete(ids_to_kill)
+  #   relationships.all.to_json
+  # end
 
   delete '/users/:id' do
     user = User.find(params[:id])
