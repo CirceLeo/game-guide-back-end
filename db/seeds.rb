@@ -34,8 +34,8 @@ kev = User.create(
 
 chett = User.create(
     username: "brewchetta",
-    password: "wish i was with phase 4"
-    profile_pic: rofilePic.all.sample
+    password: "wish i was with phase 4",
+    profile_pic: ProfilePic.all.sample
 )
 
 User.create(
