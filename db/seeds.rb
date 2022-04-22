@@ -123,7 +123,7 @@ game5 = Game.create(
     min_players: 2,
     min_age: 7,
     is_expansion: false,
-    mechanics: "hand_management, player_elimination, press_your_luck",
+    mechanics: "hand_management, card_game, player_elimination, press_your_luck",
     categories: "animals, humor"
 )
 
@@ -198,7 +198,7 @@ game9 = Game.create(
     min_players: 2,
     min_age: 13,
     is_expansion: false,
-    mechanics: "deduction, hidden_movement, point_to_point_movement, variable_player_powers",
+    mechanics: "deduction, bluffing, hidden_movement, point_to_point_movement, variable_player_powers",
     categories: "comic_book, deduction, fantasy, sci-fi, spies"
 )
 
