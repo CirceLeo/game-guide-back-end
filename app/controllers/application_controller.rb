@@ -134,7 +134,7 @@ class ApplicationController < Sinatra::Base
       username: params[:username],
       profile_pic_id: params[:profile_pic_id]
     )
-    user.to_json
+    user.to_json(include: [{game_relationships: {include: :game}}, :profile_pic])
   end
 
   post 'messages' do
