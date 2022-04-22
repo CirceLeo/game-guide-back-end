@@ -56,7 +56,7 @@ class ApplicationController < Sinatra::Base
   get '/user_games/:id' do
     user = User.find(params[:id])
     games = user.games.uniq
-    games.to_json
+    games.to_json(include: {game_relationships: {include: {user: {include: :profile_pic}}}})
   end
 
   get '/users/by-username/:username' do
