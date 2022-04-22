@@ -146,9 +146,13 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  patch 'users/:id' do
+  patch '/users/:id' do
     user = User.find(params[:id])
-    user.update(profile_pic_id: params[:profile_pic_id])
+    user.update(
+      profile_pic_id: params[:profile_pic_id],
+      username: params[:username],
+      password: params[:password]
+      )
     user.to_json
   end
 
